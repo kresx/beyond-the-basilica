@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beyond the Basilica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: documentary and respectful; a campaign site, like a museum's exhibition microsite
+   IDEA: the walk up Mount Mary Road, told as three campaigns you can enter one by one
+   PICTURE: full-bleed street photographs and the campaign's own posters and posts
+   COLOUR and TYPE: the campaign's paper, ink and candle gold; Anton, Instrument Serif italic, Inter
+   LAYOUT: home hub with three campaign doors; each campaign is its own hash view */
+:root{color-scheme:light dark;--bg:light-dark(#EEEBE5,#171614);--ink:light-dark(#1D1D1B,#EEEBE5);--soft:light-dark(#5E5A54,#B5AFA6);--line:light-dark(#D3CDC3,#3A3733);--gold:light-dark(#94661A,#D9A548);--card:light-dark(#F7F5F1,#211F1C);--night:#1D1D1B}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+html{scroll-padding-top:76px}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:1.03;margin:0;text-wrap:balance}
+h1{font-size:clamp(48px,9vw,96px)}h2{font-size:clamp(34px,5.5vw,52px)}h3{font-size:clamp(24px,3vw,30px)}
+.it{font-family:"Instrument Serif",serif;font-style:italic;text-transform:none;font-size:clamp(24px,3vw,32px);line-height:1.25;color:var(--gold)}
+.kick{font:600 14px Inter;color:var(--gold);margin:0 0 10px}
+.soft{color:var(--soft)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(4vw,18px)}
+.band{padding:clamp(40px,6vw,84px) 0}
+.rule{border-top:1px solid var(--line)}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
+.logo{font-family:Anton,sans-serif;font-size:21px;text-transform:uppercase;text-decoration:none;flex:none}
+nav{display:flex;gap:4px;overflow-x:auto;margin-left:auto}
+nav a{flex:none;text-decoration:none;font:500 15px Inter;padding:10px 14px;border-radius:30px;min-height:44px;display:flex;align-items:center}
+nav a[aria-current=page]{background:var(--ink);color:var(--bg)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.hero{position:relative;color:#F4F1EB;background:#222 center/cover;min-height:min(86vh,760px);display:flex;align-items:flex-end}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.05) 35%,rgba(0,0,0,.86))}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-bottom:48px}
+.hero .it{color:#E7B65C}
+.hero p{max-width:60ch;font-size:18px;color:#E5E0D8}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:30px;font:600 15px Inter;text-decoration:none;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
+.btn.fill{background:#F4F1EB;color:#1D1D1B;border-color:#F4F1EB}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:start}
+.lead{font-size:clamp(18px,2vw,21px);max-width:60ch}
+.doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:32px}
+.door{position:relative;display:block;aspect-ratio:3/4.2;border-radius:16px;overflow:hidden;color:#F4F1EB;text-decoration:none;background:#222}
+.door img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.door:hover img{transform:scale(1.04)}
+.door::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.88))}
+.door div{position:absolute;left:22px;right:22px;bottom:22px;z-index:1}
+.door small{font:600 13px Inter;color:#E7B65C}
+.door p{margin:8px 0 14px;color:#E5E0D8;font-size:15px}
+.door span{font:600 14px Inter;border-bottom:1px solid}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.fact{border-top:2px solid var(--ink);padding-top:14px}
+.fact p{margin:8px 0 0}
+.tp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:30px}
+.tp figure{margin:0}
+.tp img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;background:var(--card);border:1px solid var(--line)}
+figcaption{font-size:14px;color:var(--soft);margin-top:8px}
+.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;margin-top:22px}
+.strip>*{flex:none;scroll-snap-align:start}
+.strip img{height:min(440px,70vw);width:auto;border-radius:10px;border:1px solid var(--line)}
+.strip.story img{height:min(520px,90vw)}
+.ctrl{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.ctrl .btns{display:flex;gap:8px}
+.ctrl button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer}
+.stories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
+.st{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.st img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.st .t{padding:20px}
+.st p{margin:8px 0 0}
+.look{margin-top:12px!important;padding-top:12px;border-top:1px dashed var(--line);font-size:15px;color:var(--soft)}
+.flame{aspect-ratio:4/3;display:grid;place-items:center;background:var(--night)}
+.kvwrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,64px);align-items:center}
+.kvwrap img{border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.ev{margin-top:22px;padding:18px 20px;background:var(--card);border-left:3px solid var(--gold);border-radius:6px;font-size:15px}
+.steps{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.steps li{border-top:2px solid var(--ink);padding-top:12px}
+.steps b{font-family:Anton,sans-serif;font-weight:400;font-size:24px;text-transform:uppercase;display:block}
+.next{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.dark{background:var(--night);color:#F4F1EB}
+.dark .soft{color:#BDB7AE}.dark .it{color:#E7B65C}
+.view{display:none}.view.on{display:block}
+footer{background:var(--night);color:#9C978F;font-size:14px;padding:30px 0 44px}
+@media(max-width:900px){.doors,.facts{grid-template-columns:minmax(0,1fr)}.door{aspect-ratio:16/11}.tp{grid-template-columns:repeat(2,minmax(0,1fr))}.split,.kvwrap{grid-template-columns:minmax(0,1fr)}.kvwrap img{width:100%;max-width:420px}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.stories{grid-template-columns:minmax(0,1fr)}.logo{font-size:18px}nav a{padding:10px 10px;font-size:14px}header .wrap{flex-wrap:wrap;gap:0;padding-top:6px}nav{margin-left:0;width:100%}}
+@media(prefers-reduced-motion:reduce){.door img{transition:none}}
+</style></head><body>
+<header><div class="wrap"><a class="logo" href="#top">Beyond the Basilica</a>
+<nav aria-label="Main"><a href="#top" data-v="top">Home</a><a href="#objects" data-v="objects">Objects of faith</a><a href="#people" data-v="people">The people</a><a href="#journey" data-v="journey">The journey</a><a href="#about" data-v="about">About</a></nav></div></header>
+
+<main>
+<!-- ================= HOME ================= -->
+<section class="view" id="top" data-view="top">
+ <div class="hero" style="background-image:url(p/facade.jpg);background-position:center 30%"><div class="wrap">
+  <h1>Beyond the Basilica</h1><div class="it">Every street has a story.</div>
+  <p>An awareness campaign about Mount Mary, Bandra. It shifts the focus from the church alone to the people, objects and moments on the road that leads to it.</p>
+  <div class="row"><a class="btn fill" href="#objects">Start with the objects</a><a class="btn" href="#about">About the research</a></div></div></div>
+
+ <div class="band"><div class="wrap split">
+  <div><p class="kick">The idea</p><h2>Mount Mary is experienced, not just visited.</h2></div>
+  <div><p class="lead">Most pictures of Mount Mary show only the Basilica. But the visit begins much earlier, on a street full of devotional objects, stall keepers, visitors and repeated religious images.</p>
+  <p class="soft">This campaign makes that overlooked street visible. It runs as three campaigns, each looking at the same place from a different angle.</p></div></div></div>
+
+ <div class="band rule"><div class="wrap">
+  <p class="kick">Three campaigns</p><h2>Three perspectives. One shared experience.</h2>
+  <div class="doors">
+   <a class="door" href="#objects"><img src="p/statues.jpg" alt="Statues and rosaries hanging above a stall" style="object-position:center 40%"><div><small>Campaign 1</small><h3>Objects of faith</h3><p>Small things with big meaning, bought on the street and carried home.</p><span>Explore</span></div></a>
+   <a class="door" href="#people"><img src="p/street2.jpg" alt="Visitors walking past stalls" style="object-position:center 70%"><div><small>Campaign 2</small><h3>The people behind the place</h3><p>The stall keepers every pilgrim passes.</p><span>Explore</span></div></a>
+   <a class="door" href="#journey"><img src="p/street.jpg" alt="Stalls along Mount Mary Road leading uphill"><div><small>Campaign 3</small><h3>The journey beyond</h3><p>It starts before the door.</p><span>Explore</span></div></a>
+  </div></div></div>
+
+ <div class="band dark"><div class="wrap">
+  <p class="kick">Where you'll see it</p><h2>From your phone to the street</h2>
+  <p class="soft lead">The campaign runs on Instagram, in print and on the road itself.</p>
+  <div class="tp">
+   <figure><img src="a/00_launch_post.jpg" alt="Instagram launch post"><figcaption>Instagram launch post</figcaption></figure>
+   <figure><img src="a/hd-1.jpg" alt="Outdoor hoarding design" style="object-fit:contain;background:#2a2826"><figcaption>Outdoor hoarding, 20×10 ft</figcaption></figure>
+   <figure><img src="a/gd-1.jpg" alt="Folded visitor guide" style="object-fit:contain;background:#2a2826"><figcaption>Foldable visitor guide</figcaption></figure>
+   <figure><img src="a/ru-1.jpg" alt="Roll-up standee" style="object-fit:contain;background:#2a2826"><figcaption>Information standee</figcaption></figure>
+  </div></div></div>
+</section>
+
+<!-- ================= CAMPAIGN 1: OBJECTS ================= -->
+<section class="view" id="objects" data-view="objects">
+ <div class="band"><div class="wrap kvwrap">
+  <img src="a/kv-1.jpg" alt="Key visual poster: Small things. Big meaning.">
+  <div><p class="kick">Campaign 1 of 3</p><h1>Objects of faith</h1><div class="it">Small things. Big meaning.</div>
+   <p class="lead">Before you reach the church, you pass hundreds of devotional objects. Each one is bought on the street and carried home, so the visit continues long after you leave.</p>
+   <div class="ev"><b>From the research:</b> rosaries, statues, cards and candles appeared across every stall we documented. Visitors handled, compared and bought them before and after entering the Basilica.</div></div></div></div>
+
+ <div class="band rule"><div class="wrap"><p class="kick">The stories</p><h2>What to look for</h2>
+  <div class="stories">
+   <article class="st" id="rosary"><img src="p/statues.jpg" alt="Statues draped in rosaries" loading="lazy"><div class="t"><h3>The rosary</h3><p>A loop of beads used to count prayers. In Catholic devotion the rosary is a prayer to Mary, which is why it hangs on almost every stall on the road to her shrine.</p><p class="look">Look for rosaries draped over statues hung above eye level.</p></div></article>
+   <article class="st" id="prayer-card"><img src="p/cards.jpg" alt="Rows of printed prayer cards" loading="lazy"><div class="t"><h3>The prayer card</h3><p>A small printed image of Mary, Jesus or a saint, often with a prayer on the back. People keep them in wallets, cars and homes.</p><p class="look">The same faces repeat across stalls. That repetition tells you where you are.</p></div></article>
+   <article class="st" id="statue"><img src="p/cards2.jpg" alt="White statues of Mary beside religious images" loading="lazy" style="object-position:center 25%"><div class="t"><h3>The statue of Mary</h3><p>The Basilica is dedicated to Our Lady of the Mount, Mother Mary. Her statue appears on the street in every size long before you see her inside.</p><p class="look">Count how many versions of her you pass before the church door.</p></div></article>
+   <article class="st" id="wax"><div class="flame"><svg viewBox="0 0 200 150" width="62%" aria-hidden="true"><ellipse cx="100" cy="128" rx="52" ry="8" fill="#2c2a27"/><rect x="82" y="66" width="36" height="62" rx="4" fill="#EEEBE5"/><path d="M100 18c12 18 16 28 16 36a16 16 0 0 1-32 0c0-8 4-18 16-36z" fill="#D9A548"/><path d="M100 36c5 9 7 14 7 18a7 7 0 0 1-14 0c0-4 2-9 7-18z" fill="#F4E3B8"/></svg></div><div class="t"><h3>Candles and wax offerings</h3><p>Some stalls sell candles shaped like hands, feet and other parts of the body. Devotees choose the one that matches what they are praying about, often healing, and light it at the church.</p><p class="look">Look for wax shapes beside ordinary candles, especially around the September Bandra Fair.</p></div></article>
+   <article class="st" id="evil-eye"><img src="p/hanging.jpg" alt="Blue evil-eye charms and bells" loading="lazy" style="object-position:center 75%"><div class="t"><h3>The evil-eye charm</h3><p>A protective charm from a much wider tradition of belief, not a church object. Here it hangs on the same hook as rosaries and saints.</p><p class="look">Find a stall where faith and everyday belief hang together.</p></div></article>
+   <article class="st"><img src="a/st-1.jpg" alt="Street poster reading Look up" loading="lazy" style="object-position:top"><div class="t"><h3>On the street</h3><p>The "Look up." street poster and five object storytelling cards bring these stories to the stalls themselves.</p></div></article>
+  </div></div></div>
+
+ <div class="band dark"><div class="wrap"><div class="ctrl"><div><p class="kick">On Instagram</p><h2>The carousel</h2></div><div class="btns"><button type="button" data-s="s1" data-d="-1" aria-label="Previous slide">←</button><button type="button" data-s="s1" data-d="1" aria-label="Next slide">→</button></div></div>
+  <div class="strip" id="s1" data-imgs="01_objects" tabindex="0" aria-label="Instagram carousel for Objects of faith"></div></div></div>
+ <div class="band"><div class="wrap next"><span class="soft">Next campaign</span><a class="btn" href="#people">The people behind the place →</a></div></div>
+</section>
+
+<!-- ================= CAMPAIGN 2: PEOPLE ================= -->
+<section class="view" id="people" data-view="people">
+ <div class="band"><div class="wrap kvwrap">
+  <img src="a/kv-2.jpg" alt="Key visual poster: Every pilgrim passes them.">
+  <div><p class="kick">Campaign 2 of 3</p><h1>The people behind the place</h1><div class="it">Every pilgrim passes them.</div>
+   <p class="lead">The stall keepers set up the first images of faith a visitor sees, arranging statues high and cards in rows so every stall works like a small shrine.</p>
+   <div class="ev"><b>From the research:</b> visitors paused, talked to vendors and bought objects on the way up. Those small exchanges were part of the visit, not separate from it.</div></div></div></div>
+
+ <div class="band rule"><div class="wrap"><p class="kick">The stories</p><h2>Faith and livelihood share the same street</h2>
+  <div class="stories">
+   <article class="st"><img src="p/street.jpg" alt="Stalls under blue tarpaulin along the road" loading="lazy"><div class="t"><h3>The stall keepers</h3><p>Stalls line the road to the church, and each one is a small display of faith. For the people who run them, these stalls are a living. For visitors, they are part of the pilgrimage.</p></div></article>
+   <article class="st"><img src="p/street2.jpg" alt="Visitors browsing at the stalls" loading="lazy" style="object-position:center 85%"><div class="t"><h3>The visitors</h3><p>People stop, ask, choose, buy and walk on. Every pause is a conversation, and these small exchanges shape how Mount Mary feels.</p></div></article>
+   <article class="st"><img src="a/cd-11.jpg" alt="Vendor storytelling card front" loading="lazy" style="object-position:top"><div class="t"><h3>Vendor storytelling cards</h3><p>Fill-in cards completed with stall keepers, with their permission: the name of the stall, how long they have been on this street, and their story in their own words.</p><p class="look">Vendor stories collected on the street will be added here.</p></div></article>
+   <article class="st"><img src="a/st-3.jpg" alt="Street poster reading Ask" loading="lazy" style="object-position:top"><div class="t"><h3>On the street</h3><p>The "Ask." street poster and stall tags invite visitors to stop and talk to the people behind the stalls.</p></div></article>
+  </div></div></div>
+
+ <div class="band dark"><div class="wrap"><div class="ctrl"><div><p class="kick">On Instagram</p><h2>The carousel</h2></div><div class="btns"><button type="button" data-s="s2" data-d="-1" aria-label="Previous slide">←</button><button type="button" data-s="s2" data-d="1" aria-label="Next slide">→</button></div></div>
+  <div class="strip" id="s2" data-imgs="02_people" tabindex="0" aria-label="Instagram carousel for The people"></div></div></div>
+ <div class="band"><div class="wrap next"><a class="btn" href="#objects">← Objects of faith</a><a class="btn" href="#journey">The journey beyond →</a></div></div>
+</section>
+
+<!-- ================= CAMPAIGN 3: JOURNEY ================= -->
+<section class="view" id="journey" data-view="journey">
+ <div class="band"><div class="wrap kvwrap">
+  <img src="a/kv-3.jpg" alt="Key visual poster: It starts before the door.">
+  <div><p class="kick">Campaign 3 of 3</p><h1>The journey beyond</h1><div class="it">It starts before the door.</div>
+   <p class="lead">The visit is not a straight line. People move back and forth between the road, the stalls and the church. The Basilica is where the journey ends, not where it begins.</p>
+   <div class="ev"><b>From the research:</b> our visitor journey map showed the same pattern again and again: approach, browse, pause, interact, pray, then continue towards the church.</div></div></div></div>
+
+ <div class="band rule"><div class="wrap"><p class="kick">The walk</p><h2>Six moments on the way up</h2>
+  <ol class="steps">
+   <li><b>Approach</b><span class="soft">The road fills with religious images before the Basilica is in sight.</span></li>
+   <li><b>Browse</b><span class="soft">Visitors slow down at the stalls and look through what is on display.</span></li>
+   <li><b>Pause</b><span class="soft">People stop, sit and look up at statues hung above eye level.</span></li>
+   <li><b>Interact</b><span class="soft">Objects are handled and chosen; vendors and visitors talk.</span></li>
+   <li><b>Pray</b><span class="soft">Prayer starts outside, at shrines along the way.</span></li>
+   <li><b>Arrive</b><span class="soft">The Basilica ends the journey. It does not begin it.</span></li>
+  </ol>
+  <div class="stories">
+   <article class="st"><img src="p/nativity.jpg" alt="Outdoor shrine near the Basilica" loading="lazy"><div class="t"><h3>Prayer starts outside</h3><p>Shrines along the approach turn the street itself into part of the sacred space.</p></div></article>
+   <article class="st"><img src="a/gd-2.jpg" alt="Inside of the visitor guide" loading="lazy" style="object-fit:contain;background:var(--card)"><div class="t"><h3>The visitor guide</h3><p>A fold-out guide with the walk, the objects and a "Can you spot…" checklist, handed out at the foot of the road.</p></div></article>
+  </div></div></div>
+
+ <div class="band dark"><div class="wrap"><div class="ctrl"><div><p class="kick">On Instagram</p><h2>The carousel</h2></div><div class="btns"><button type="button" data-s="s3" data-d="-1" aria-label="Previous slide">←</button><button type="button" data-s="s3" data-d="1" aria-label="Next slide">→</button></div></div>
+  <div class="strip" id="s3" data-imgs="03_journey" tabindex="0" aria-label="Instagram carousel for The journey"></div>
+  <h3 style="margin-top:40px">Instagram stories</h3>
+  <div class="strip story" id="s4" data-imgs="04_story" tabindex="0" aria-label="Instagram stories"></div></div></div>
+ <div class="band"><div class="wrap next"><a class="btn" href="#people">← The people</a><a class="btn" href="#about">About the research →</a></div></div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="view" id="about" data-view="about">
+ <div class="band"><div class="wrap split">
+  <div><p class="kick">About</p><h1>Built from the street up</h1></div>
+  <div><p class="lead">Beyond the Basilica grew out of an ethnographic study of Mount Mary Road in Bandra, Mumbai. We visited the area, observed how people moved, what they noticed, how they dealt with vendors, what they bought and where they prayed, and documented it through photographs.</p>
+  <p class="soft">The observations were sorted into recurring behaviours, then grouped into themes. Those themes became the three campaigns on this site.</p></div></div></div>
+ <div class="band rule"><div class="wrap"><p class="kick">What we found</p><h2>Three findings, three campaigns</h2>
+  <div class="facts">
+   <div class="fact"><h3>Faith × commerce</h3><p class="soft">Religious objects are displayed, bought and carried home on the same street. This became <a href="#objects">Objects of faith</a>.</p></div>
+   <div class="fact"><h3>People × place</h3><p class="soft">Vendors and visitors shape the experience through small, everyday exchanges. This became <a href="#people">The people behind the place</a>.</p></div>
+   <div class="fact"><h3>Environment × movement</h3><p class="soft">Visitors move between road, stalls and church; the journey is not linear. This became <a href="#journey">The journey beyond</a>.</p></div>
+  </div></div></div>
+ <div class="band dark"><div class="wrap split">
+  <div><h2>Not just where you arrive</h2><div class="it">It is everything along the way.</div></div>
+  <div><p class="soft">Campaign design by Ananya Gutgutia. Ethnographic research with Navya Ganatra and Palak Agarwal. Design Research and Ethnography, ISDI Atlas SkillTech University, Mumbai. All photographs taken on Mount Mary Road, Bandra West.</p>
+  <div class="row"><button class="btn" id="copy" type="button">Copy link to share</button></div><p id="msg" class="soft" aria-live="polite"></p></div></div></div>
+</section>
+</main>
+<footer><div class="wrap">Beyond the Basilica · Every street has a story. · Mount Mary Road, Bandra, Mumbai</div></footer>
+
+<script>{
+const views=[...document.querySelectorAll('.view')], navs=[...document.querySelectorAll('nav a')];
+for(const s of document.querySelectorAll('.strip[data-imgs]')){const p=s.dataset.imgs,n=7;
+  s.innerHTML=Array.from({length:n},(_,i)=>`<img src="a/${p}_${i+1}.jpg" alt="${s.getAttribute('aria-label')}, ${i+1} of ${n}" loading="lazy">`).join('');}
+function show(){
+  const id=(location.hash||'#top').slice(1);
+  const el=document.getElementById(id)||document.getElementById('top');
+  const v=el.closest('.view')||document.getElementById('top');
+  views.forEach(x=>x.classList.toggle('on',x===v));
+  navs.forEach(a=>{if(a.dataset.v===v.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  if(el===v)window.scrollTo(0,0);else requestAnimationFrame(()=>el.scrollIntoView());
+}
+addEventListener('hashchange',show);show();
+for(const b of document.querySelectorAll('[data-s]'))b.addEventListener('click',()=>{const s=document.getElementById(b.dataset.s);s.scrollBy({left:(+b.dataset.d)*s.clientWidth*.8,behavior:'smooth'})});
+for(const s of document.querySelectorAll('.strip'))s.addEventListener('keydown',e=>{if(e.key==='ArrowRight')s.scrollBy({left:s.clientWidth*.8});if(e.key==='ArrowLeft')s.scrollBy({left:-s.clientWidth*.8})});
+const c=document.getElementById('copy'),m=document.getElementById('msg');
+c.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href.split('#')[0]);m.textContent='Link copied.'}catch(e){m.textContent='Copy the address from your browser bar to share.'}});
+}</script>
+</body></html>
